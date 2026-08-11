@@ -1,0 +1,30 @@
+  - name: Setup Node.js
+    uses: actions/setup-node@v4
+    with:
+      node-version: '18'
+
+  - name: Install dependencies
+    run: npm ci
+
+  - name: Start dev server and fetch site
+    run: |
+      npm run start &
+      # wait for the server to start
+      for i in {1..10}; do
+        if curl -sSf http://localhost:8000/ -o /dev/null; then
+          echo "server is up"
+          break
+        fi
+        echo "waiting for server..."
+        sleep 1
+      done
+      curl -sSf http://localhost:8000/ -o site_index.html
+      echo "--- site index ---"
+      cat site_index.html
+    shell: bash
+
+  - name: Upload site index
+    uses: actions/upload-artifact@v4
+    with:
+      name: site-index
+      path: site_index.html
