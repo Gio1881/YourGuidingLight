@@ -1,0 +1,14 @@
+{
+  "name": "your-guiding-light",
+  "version": "0.1.0",
+  "description": "Scripture-centered meditation static site (Still Waters fork)",
+  "main": "index.html",
+  "scripts": {
+    "start": "http-server -c-1 . -p 8000",
+    "serve": "http-server -c-1 . -p 8000"
+  },
+  "devDependencies": {
+    "http-server": "^14.1.1"
+  },
+  "license": "MIT"
+}
